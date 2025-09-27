@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISTANBUL - ECUA GALA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        .playfair { font-family: 'Playfair Display', serif; }
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .hero-background {
+            background-image: url('ecua.jpg'); /* Updated background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: absolute;
+            inset: 0;
+            filter: brightness(0.9); /* Darken the image a bit for better text contrast */
+            z-index: 0;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .gradient-gold {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(246, 211, 101, 0.5); }
+            to { box-shadow: 0 0 30px rgba(246, 211, 101, 0.8); }
+        }
+        .ticket-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .modal-backdrop {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <nav class="fixed top-0 w-full z-50 glass">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="Gala.jpg" alt="Logo ECUA-GALA" class="h-10 w-10 rounded-full mr-3">
+                    <h1 class="text-xl font-bold text-white playfair">ECUA-GALA</h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-white hover:text-yellow-300 transition-colors">Inicio</a>
+                    <a href="#tickets" class="text-white hover:text-yellow-300 transition-colors">Entradas</a>
+                </div>
+                <button onclick="openTicketModal()" class="gradient-gold text-white px-6 py-2 rounded-full font-semibold hover:scale-105 transition-transform">
+                    Reservar Entrada
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="min-h-screen relative flex items-center justify-center overflow-hidden">
+        <div class="hero-background"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-800 to-indigo-900 opacity-60"></div>
+        
+        <div class="text-center text-white z-10 px-4 max-w-4xl">
+            <h1 class="text-5xl md:text-7xl font-bold playfair mb-6 animate-fade-in">
+                ISTANBUL
+                <span class="block gradient-gold bg-clip-text text-transparent">ECUA GALA PRIMERA EDICION 2025</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">
+                Acompáñanos en una velada inolvidable de distinción, entretenimiento y esperanza.
+            </p>
+            
+            <div class="glass rounded-2xl p-6 mb-8 inline-block">
+                <h3 class="text-lg font-semibold mb-4">Cuenta Atrás</h3>
+                <div id="countdown" class="flex justify-center space-x-4 text-center">
+                    <div><div id="days" class="text-2xl font-bold">000</div><div class="text-sm">Días</div></div>
+                    <div><div id="hours" class="text-2xl font-bold">00</div><div class="text-sm">Horas</div></div>
+                    <div><div id="minutes" class="text-2xl font-bold">00</div><div class="text-sm">Minutos</div></div>
+                    <div><div id="seconds" class="text-2xl font-bold">00</div><div class="text-sm">Segundos</div></div>
+                </div>
+            </div>
+            
+            <div class="space-y-4 md:space-y-0 md:space-x-4 md:flex md:justify-center">
+                <button onclick="document.getElementById('tickets').scrollIntoView({behavior: 'smooth'})" class="gradient-gold text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform animate-glow block w-full md:w-auto">
+                    🎫 ¡Consigue tu entrada!
+                </button>
+            </div>
+        </div>
+    </section>
+
+   <section id="tickets" class="py-20 gradient-bg">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold playfair text-white mb-6">Tu Experiencia Exclusiva</h2>
+                <p class="text-xl text-white opacity-90 max-w-3xl mx-auto">
+                    Hemos preparado una entrada única con precio promocional para que no te pierdas esta noche mágica.
+                </p>
+            </div>
+            
+            <div class="flex justify-center">
+                <div class="ticket-card rounded-2xl p-8 text-center w-full max-w-md hover:scale-105 transition-transform border-4 border-yellow-400 relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-semibold">
+                        Promoción Especial
+                    </div>
+                    <h3 class="text-2xl font-bold playfair mb-4">Entrada Gala</h3>
+                    <div class="text-5xl font-bold text-purple-600 mb-6">2000 TL</div>
+                    
+                    <button onclick="openTicketModal()" class="w-full gradient-gold text-white py-3 rounded-full font-semibold hover:scale-105 transition-transform">
+                        Reservar Mi Lugar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-center md:text-left">
+                <div>
+                    <h3 class="text-2xl font-bold playfair text-white mb-2">ECUA GALA</h3>
+                    <p class="text-gray-400">Una velada inolvidable de distinción y entretenimiento en el corazón de Estambul.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Navegación</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="hover:text-yellow-300 transition-colors">Inicio</a></li>
+                        <li><a href="#tickets" class="hover:text-yellow-300 transition-colors">Comprar Entradas</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Síguenos</h4>
+                    <p class="text-gray-400 mb-3">Mantente al día con las últimas noticias del evento.</p>
+                    <div class="flex space-x-4 justify-center md:justify-start">
+                        <a href="https://www.instagram.com/istanbul_ecuagala?igsh=NXZsNmJkNm10M2U4&utm_source=qr" target="_blank" class="text-gray-400 hover:text-white transition-colors" aria-label="Instagram">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919C8.416 2.175 8.796 2.163 12 2.163zm0 1.802c-3.116 0-3.478.012-4.694.068-2.618.12-3.64 1.143-3.76 3.76-.056 1.217-.067 1.575-.067 4.694s.011 3.478.067 4.694c.12 2.618 1.143 3.64 3.76 3.76 1.217.056 1.575.067 4.694.067s3.478-.011 4.694-.067c2.618-.12 3.64-1.143 3.76-3.76.056-1.217.067-1.575.067-4.694s-.011-3.478-.067-4.694c-.12-2.618-1.143-3.64-3.76-3.76-1.217-.056-1.575-.067-4.694-.067zM12 6.873c-2.849 0-5.152 2.303-5.152 5.152s2.303 5.152 5.152 5.152 5.152-2.303 5.152-5.152-2.303-5.152-5.152-5.152zm0 8.498c-1.849 0-3.346-1.497-3.346-3.346s1.497-3.346 3.346-3.346 3.346 1.497 3.346 3.346-1.497 3.346-3.346 3.346zm5.25-8.232c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25z"/>
+                            </svg>
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 mt-8 text-center text-gray-500">
+                <p>&copy; 2025 ECUA-GALA. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="ticketModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-backdrop absolute inset-0" onclick="closeTicketModal()"></div>
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-screen overflow-y-auto relative">
+                <button onclick="closeTicketModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                
+                <div class="p-6">
+                    <h2 class="text-2xl font-bold playfair mb-6 text-center">Pasos para Reservar tu Entrada</h2>
+                    
+                    <form id="ticketForm">
+                        <div class="mb-6 p-4 bg-purple-50 border-l-4 border-purple-500">
+                            <h3 class="font-bold text-lg mb-2">Paso 1: Realiza la Transferencia</h3>
+                            <p class="text-sm text-gray-700">Transfiere el monto total de <strong class="text-purple-700">2000 TL</strong> a la siguiente cuenta:</p>
+                            <div class="mt-3 bg-gray-100 p-3 rounded-md text-sm">
+                                <p><strong>Nombre:</strong> LUIS CRISTIAN EBANG NTUTUMU NCHAMA</p>
+                                <p><strong>IBAN:</strong> TR24 0082 9000 0949 1958 5268 17</p>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <h3 class="font-bold text-lg mb-2">Paso 2: Completa tus Datos</h3>
+                            <p class="text-sm text-gray-700 mb-3">Para que podamos identificar tu pago.</p>
+                            <div class="mb-4">
+                                <label class="block text-sm font-semibold mb-2">Nombre Completo *</label>
+                                <input type="text" id="fullName" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Email *</label>
+                                <input type="email" id="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                            </div>
+                        </div>
+
+                        <div class="mb-6 p-4 bg-green-50 border-l-4 border-green-500 text-center">
+                            <h3 class="font-bold text-lg mb-2">Paso 3: Envía Comprobante de Pago a WhatsApp</h3>
+                            <p class="text-sm text-gray-700 mb-3">Haz clic en el botón para enviar una captura de pantalla de tu transferencia a nuestro WhatsApp y confirmar tu entrada.</p>
+                            <a href="https://wa.me/905421972804?text=Hola%2C%20he%20realizado%20la%20transferencia%20para%20la%20ECUA%20GALA.%20Mi%20nombre%20es%3A%20%5BTu%20Nombre%5D%20y%20mi%20email%20es%3A%20%5BTu%20Email%5D.%20Adjunto%20comprobante." 
+                               target="_blank" class="w-full bg-green-500 text-white py-3 rounded-full font-semibold hover:bg-green-600 transition-colors inline-flex items-center justify-center px-4">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.557-3.84-1.557-5.897C.187 5.078 5.23 0 11.423 0c3.065 0 5.626 1.153 7.644 3.018l.006.006c.006.006.006.006.006.006l.004.004c.008.008.008.008.008.008c2.016 1.868 3.179 4.316 3.179 6.941 0 5.86-5.041 10.627-11.235 10.627-2.147 0-4.14-.664-5.879-1.828l-6.176 1.685zm6.541-4.418l-.404-.24c-1.46-1.09-2.28-2.61-2.28-4.275 0-3.327 2.72-6.046 6.048-6.046 1.652 0 3.204.665 4.398 1.838l.006.006c.002.002.004.004.004.004c1.192 1.173 1.855 2.72 1.855 4.372 0 3.328-2.72 6.048-6.048 6.048-1.637 0-3.176-.662-4.364-1.826l-.006-.006c-.002-.002-.004-.004-.004-.004zM11.423 2c-4.41 0-8.004 3.593-8.004 8 0 1.583.473 3.085 1.344 4.394l.002-.002c.002.002.002.002.002.002.872 1.309 2.19 2.378 3.737 2.943l.004-.002c.004-.002.006-.002.008-.002.002 0 .004-.002.006-.002l.004-.002c.004 0 .006-.002.01-.002 1.547-.565 2.865-1.634 3.737-2.943l.002-.002c.002-.002.002-.002.002-.002.87-.134 1.706-.395 2.486-.777l.004-.002c.004-.002.006-.002.008-.002.002 0 .004-.002.006-.002l.004-.002c.004 0 .006-.002.01-.002 4.41 0 8.004-3.594 8.004-8 0-4.409-3.594-8-8.004-8zm0 2.404c3.087 0 5.596 2.509 5.596 5.596 0 3.087-2.509 5.596-5.596 5.596-3.087 0-5.596-2.509-5.596-5.596 0-3.087 2.509-5.596 5.596-5.596z"/></svg>
+                                Enviar Comprobante por WhatsApp
+                            </a>
+                        </div>
+                        
+                        <button type="submit" class="w-full gradient-gold text-white py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform">
+                            ¡Ya hice la transferencia!
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirmationModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-backdrop absolute inset-0" onclick="closeConfirmationModal()"></div>
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full">
+                <div class="p-8 text-center">
+                    <div class="text-6xl mb-4">🎉</div>
+                    <h2 class="text-2xl font-bold playfair mb-4">¡Registro Enviado!</h2>
+                    <p class="text-gray-600 mb-6">
+                        Hemos recibido tus datos. Para finalizar tu reserva y recibir tu ticket digital, **por favor, asegúrate de haber enviado el comprobante de transferencia a nuestro WhatsApp**.
+                    </p>
+                    <button onclick="closeConfirmationModal()" class="w-full bg-purple-600 text-white py-3 rounded-full font-semibold hover:bg-purple-700 transition-colors">
+                        Entendido
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Countdown Timer ---
+        function updateCountdown() {
+            const eventDate = new Date('December 15, 2025 19:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = "<div class='text-xl font-bold'>¡El evento ha comenzado!</div>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(3, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // --- Modal Logic ---
+        const ticketModal = document.getElementById('ticketModal');
+        const confirmationModal = document.getElementById('confirmationModal');
+
+        function openTicketModal() {
+            ticketModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTicketModal() {
+            ticketModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function closeConfirmationModal() {
+            confirmationModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            document.getElementById('ticketForm').reset();
+        }
+
+        // --- Form Processing ---
+        document.getElementById('ticketForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            
+            // Encode the message for WhatsApp
+            const whatsappMessage = `Hola, he realizado la transferencia para la ECUA GALA. Mi nombre es: ${fullName} y mi email es: ${email}. Adjunto comprobante.`;
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const whatsappLink = `https://wa.me/905421972804?text=${encodedMessage}`;
+
+            // Show confirmation modal
+            closeTicketModal();
+            confirmationModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            // Optional: Redirect to WhatsApp after a short delay for user to read confirmation
+            setTimeout(() => {
+                window.open(whatsappLink, '_blank');
+            }, 2000); // 2 seconds delay
+        });
+
+
+        // --- General Event Listeners ---
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Close modals on backdrop click or Escape key
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal-backdrop')) {
+                closeTicketModal();
+                closeConfirmationModal();
+            }
+        });
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeTicketModal();
+                closeConfirmationModal();
+            }
+        });
+    </script>
+</body>
+</html>
