@@ -113,19 +113,33 @@
             <div class="text-center mb-12">
                 <h2 class="text-4xl md:text-5xl font-bold playfair text-white mb-6">Tu Experiencia Exclusiva</h2>
                 <p class="text-xl text-white opacity-90 max-w-3xl mx-auto">
-                    Hemos preparado una entrada única con precio promocional para que no te pierdas esta noche mágica.
+                    Asegura tu lugar en la ECUA GALA con nuestras opciones de entrada.
                 </p>
             </div>
             
-            <div class="flex justify-center">
-                <div class="ticket-card rounded-2xl p-8 text-center w-full max-w-md hover:scale-105 transition-transform border-4 border-yellow-400 relative">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-semibold">
-                        Promoción Especial
+            <div class="flex flex-wrap justify-center gap-8">
+                <div class="ticket-card rounded-2xl p-8 text-center w-full max-w-sm hover:scale-105 transition-transform border-4 border-pink-400 relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-pink-400 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                        Entrada para Mujeres
                     </div>
-                    <h3 class="text-2xl font-bold playfair mb-4">Entrada Gala</h3>
-                    <div class="text-5xl font-bold text-purple-600 mb-6">2000 TL</div>
+                    <h3 class="text-2xl font-bold playfair mb-4">Acceso VIP Femenino</h3>
+                    <p class="text-gray-600 mb-2">Disfruta de una noche mágica.</p>
+                    <div class="text-5xl font-bold text-pink-600 mb-6">3000 TL</div>
                     
-                    <button onclick="openTicketModal()" class="w-full gradient-gold text-white py-3 rounded-full font-semibold hover:scale-105 transition-transform">
+                    <button onclick="openTicketModal('women')" class="w-full bg-pink-500 text-white py-3 rounded-full font-semibold hover:bg-pink-600 transition-transform">
+                        Reservar Mi Lugar
+                    </button>
+                </div>
+
+                <div class="ticket-card rounded-2xl p-8 text-center w-full max-w-sm hover:scale-105 transition-transform border-4 border-blue-400 relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-400 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                        Entrada para Hombres
+                    </div>
+                    <h3 class="text-2xl font-bold playfair mb-4">Acceso VIP Masculino</h3>
+                    <p class="text-gray-600 mb-2">Una experiencia de gala inolvidable.</p>
+                    <div class="text-5xl font-bold text-blue-600 mb-6">3500 TL</div>
+                    
+                    <button onclick="openTicketModal('men')" class="w-full bg-blue-500 text-white py-3 rounded-full font-semibold hover:bg-blue-600 transition-transform">
                         Reservar Mi Lugar
                     </button>
                 </div>
@@ -176,12 +190,12 @@
                 <button onclick="closeTicketModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
                 
                 <div class="p-6">
-                    <h2 class="text-2xl font-bold playfair mb-6 text-center">Pasos para Reservar tu Entrada</h2>
+                    <h2 class="text-2xl font-bold playfair mb-6 text-center">Pasos para Reservar tu Entrada <span id="modalTicketType"></span></h2>
                     
                     <form id="ticketForm">
                         <div class="mb-6 p-4 bg-purple-50 border-l-4 border-purple-500">
                             <h3 class="font-bold text-lg mb-2">Paso 1: Realiza la Transferencia</h3>
-                            <p class="text-sm text-gray-700">Transfiere el monto total de <strong class="text-purple-700">2000 TL</strong> a la siguiente cuenta:</p>
+                            <p class="text-sm text-gray-700">Transfiere el monto total de <strong id="ticketPrice" class="text-purple-700"></strong> a la siguiente cuenta:</p>
                             <div class="mt-3 bg-gray-100 p-3 rounded-md text-sm">
                                 <p><strong>Nombre:</strong> LUIS CRISTIAN EBANG NTUTUMU NCHAMA</p>
                                 <p><strong>IBAN:</strong> TR24 0082 9000 0949 1958 5268 17</p>
@@ -204,8 +218,8 @@
                         <div class="mb-6 p-4 bg-green-50 border-l-4 border-green-500 text-center">
                             <h3 class="font-bold text-lg mb-2">Paso 3: Envía Comprobante de Pago a WhatsApp</h3>
                             <p class="text-sm text-gray-700 mb-3">Haz clic en el botón para enviar una captura de pantalla de tu transferencia a nuestro WhatsApp y confirmar tu entrada.</p>
-                            <a href="https://wa.me/905421972804?text=Hola%2C%20he%20realizado%20la%20transferencia%20para%20la%20ECUA%20GALA.%20Mi%20nombre%20es%3A%20%5BTu%20Nombre%5D%20y%20mi%20email%20es%3A%20%5BTu%20Email%5D.%20Adjunto%20comprobante." 
-                               target="_blank" class="w-full bg-green-500 text-white py-3 rounded-full font-semibold hover:bg-green-600 transition-colors inline-flex items-center justify-center px-4">
+                            <a id="whatsappLink" href="" 
+                                target="_blank" class="w-full bg-green-500 text-white py-3 rounded-full font-semibold hover:bg-green-600 transition-colors inline-flex items-center justify-center px-4">
                                 <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.557-3.84-1.557-5.897C.187 5.078 5.23 0 11.423 0c3.065 0 5.626 1.153 7.644 3.018l.006.006c.006.006.006.006.006.006l.004.004c.008.008.008.008.008.008c2.016 1.868 3.179 4.316 3.179 6.941 0 5.86-5.041 10.627-11.235 10.627-2.147 0-4.14-.664-5.879-1.828l-6.176 1.685zm6.541-4.418l-.404-.24c-1.46-1.09-2.28-2.61-2.28-4.275 0-3.327 2.72-6.046 6.048-6.046 1.652 0 3.204.665 4.398 1.838l.006.006c.002.002.004.004.004.004c1.192 1.173 1.855 2.72 1.855 4.372 0 3.328-2.72 6.048-6.048 6.048-1.637 0-3.176-.662-4.364-1.826l-.006-.006c-.002-.002-.004-.004-.004-.004zM11.423 2c-4.41 0-8.004 3.593-8.004 8 0 1.583.473 3.085 1.344 4.394l.002-.002c.002.002.002.002.002.002.872 1.309 2.19 2.378 3.737 2.943l.004-.002c.004-.002.006-.002.008-.002.002 0 .004-.002.006-.002l.004-.002c.004 0 .006-.002.01-.002 1.547-.565 2.865-1.634 3.737-2.943l.002-.002c.002-.002.002-.002.002-.002.87-.134 1.706-.395 2.486-.777l.004-.002c.004-.002.006-.002.008-.002.002 0 .004-.002.006-.002l.004-.002c.004 0 .006-.002.01-.002 4.41 0 8.004-3.594 8.004-8 0-4.409-3.594-8-8.004-8zm0 2.404c3.087 0 5.596 2.509 5.596 5.596 0 3.087-2.509 5.596-5.596 5.596-3.087 0-5.596-2.509-5.596-5.596 0-3.087 2.509-5.596 5.596-5.596z"/></svg>
                                 Enviar Comprobante por WhatsApp
                             </a>
@@ -267,8 +281,28 @@
         // --- Modal Logic ---
         const ticketModal = document.getElementById('ticketModal');
         const confirmationModal = document.getElementById('confirmationModal');
+        const modalTicketType = document.getElementById('modalTicketType');
+        const ticketPrice = document.getElementById('ticketPrice');
+        const whatsappLink = document.getElementById('whatsappLink');
 
-        function openTicketModal() {
+        let selectedTicketType = ''; // To store which ticket type was selected
+
+        function openTicketModal(type) {
+            selectedTicketType = type;
+            let price = '';
+            let typeText = '';
+
+            if (type === 'women') {
+                price = '3000 TL';
+                typeText = ' para Mujeres';
+            } else if (type === 'men') {
+                price = '3500 TL';
+                typeText = ' para Hombres';
+            }
+
+            modalTicketType.textContent = typeText;
+            ticketPrice.textContent = price;
+
             ticketModal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
@@ -294,7 +328,10 @@
             // Encode the message for WhatsApp
             const whatsappMessage = `Hola, he realizado la transferencia para la ECUA GALA. Mi nombre es: ${fullName} y mi email es: ${email}. Adjunto comprobante.`;
             const encodedMessage = encodeURIComponent(whatsappMessage);
-            const whatsappLink = `https://wa.me/905421972804?text=${encodedMessage}`;
+            const whatsappBaseLink = `https://wa.me/905421972804?text=`;
+            
+            // Update the WhatsApp link in the modal directly
+            whatsappLink.href = whatsappBaseLink + encodedMessage;
 
             // Show confirmation modal
             closeTicketModal();
@@ -303,7 +340,7 @@
 
             // Optional: Redirect to WhatsApp after a short delay for user to read confirmation
             setTimeout(() => {
-                window.open(whatsappLink, '_blank');
+                window.open(whatsappLink.href, '_blank');
             }, 2000); // 2 seconds delay
         });
 
